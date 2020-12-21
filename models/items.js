@@ -3,7 +3,7 @@ const { query } = require("../db/index");
 /*-----------------------users------------------------*/
 
 /*-----------POST: Creating a Users------------*/
-async function createUser() {
+async function createUser(value) {
   const res = query(
     `
     INSERT INTO users (admin, name, email, profileImage, cohort, currentRole, currentEmployer, skills, introduction)

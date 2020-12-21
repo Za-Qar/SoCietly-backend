@@ -11,7 +11,7 @@ router.post("/", async function (req, res) {
 
   const user = await createUser(body);
 
-  console.log("this is body in users.js: ", user);
+  console.log("this is user in users.js: ", user);
 
   res.json(user);
 });
