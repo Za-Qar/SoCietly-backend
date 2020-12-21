@@ -1,21 +1,21 @@
-const {query} = require("../index");
+const { query } = require("../index");
 
-async function createUsers(){
-    let res = await query(
-        `CREATE TABLE users(
+async function createUsers() {
+  let res = await query(
+    `CREATE TABLE users(
             id SERIAL PRIMARY KEY,
             admin BOOL,
             name TEXT,
             email TEXT,
-            profile_image TEXT,
+            profileImage TEXT,
             cohort INTEGER,
-            current_role TEXT,
-            current_employer TEXT,
+            currentRole TEXT,
+            currentEmployer TEXT,
             skills TEXT,
             introduction TEXT
         )`
-    );
-    console.log(res)
+  );
+  console.log(res);
 }
 
 createUsers();
