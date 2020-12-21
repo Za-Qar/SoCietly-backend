@@ -1,9 +1,9 @@
-const {query} = require("../index");
+const { query } = require("../index");
 
 /*-------------Create Events Table-------------*/
-async function createEvents(){
-    let res = await query(
-        `CREATE TABLE events(
+async function createEvents() {
+  let res = await query(
+    `CREATE TABLE events(
             id SERIAL PRIMARY KEY,
             eventName TEXT,
             eventType TEXT,
@@ -14,50 +14,48 @@ async function createEvents(){
             enableVolunteers BOOL,
             attendingList TEXT,
             likes INTEGER,
-            volunteerList TEXT,
+            volunteerList TEXT
 
         )`
-    );
-    console.log(res)
+  );
+  console.log(res);
 }
 
 createEvents();
 
 /*-------------Create Journey Table-------------*/
-async function createJourney(){
-    let res = await query(
-        `CREATE TABLE journey(
+async function createJourney() {
+  let res = await query(
+    `CREATE TABLE journey(
             id SERIAL PRIMARY KEY,
             employer TEXT,
             jobTitle TEXT,
             startDate DATE,
             description TEXT
         )`
-    );
-    console.log(res)
+  );
+  console.log(res);
 }
 
 createJourney();
 
 /*-------------Create Users Table-------------*/
-async function createUsers(){
-    let res = await query(
-        `CREATE TABLE users(
+async function createUsers() {
+  let res = await query(
+    `CREATE TABLE users(
             id SERIAL PRIMARY KEY,
             admin BOOL,
             name TEXT,
             email TEXT,
-            profile_image TEXT,
+            profileImage TEXT,
             cohort INTEGER,
-            current_role TEXT,
-            current_employer TEXT,
+            currentRole TEXT,
+            currentEmployer TEXT,
             skills TEXT,
             introduction TEXT
         )`
-    );
-    console.log(res)
+  );
+  console.log(res);
 }
 
 createUsers();
-
-
