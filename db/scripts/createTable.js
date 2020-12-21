@@ -1,5 +1,45 @@
 const {query} = require("../index");
 
+/*-------------Create Events Table-------------*/
+async function createEvents(){
+    let res = await query(
+        `CREATE TABLE events(
+            id SERIAL PRIMARY KEY,
+            eventName TEXT,
+            eventType TEXT,
+            timeDate DATE,
+            description TEXT,
+            image TEXT, 
+            location TEXT, 
+            enableVolunteers BOOL,
+            attendingList TEXT,
+            likes INTEGER,
+            volunteerList TEXT,
+
+        )`
+    );
+    console.log(res)
+}
+
+createEvents();
+
+/*-------------Create Journey Table-------------*/
+async function createJourney(){
+    let res = await query(
+        `CREATE TABLE journey(
+            id SERIAL PRIMARY KEY,
+            employer TEXT,
+            jobTitle TEXT,
+            startDate DATE,
+            description TEXT
+        )`
+    );
+    console.log(res)
+}
+
+createJourney();
+
+/*-------------Create Users Table-------------*/
 async function createUsers(){
     let res = await query(
         `CREATE TABLE users(
@@ -19,3 +59,5 @@ async function createUsers(){
 }
 
 createUsers();
+
+
