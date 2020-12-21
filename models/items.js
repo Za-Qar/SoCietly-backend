@@ -35,7 +35,7 @@ async function getAllUsers() {
 /*-----------------------Journey-----------------------*/
 async function createJourney() {
   const res = query(
-    `INSERT INTO journey (employer, jobTitle, startDate, description) VALUES ($1, $2, $3, $4, $5)`,
+    `INSERT INTO journey (employer, jobTitle, startDate, description) VALUES ($1, $2, $3, $4)`,
     [value.employer, value.jobTitle, value.startDate, value.description]
   );
   return res;
@@ -44,34 +44,35 @@ async function createJourney() {
 /*-----------------------Events-----------------------*/
 
 async function createEvent() {
-    const value = [
-        eventName,
-        eventType,
-        timeDate,
-        description,
-        image,
-        location,
-        enableVolunteers,
-        attendingList,
-        likes,
-        volunteerList,
-      ];
-  const res = await query(`
+  const res = await query(
+    `
     INSERT INTO events(
         eventName, eventType, timeDate, description, image, location, enableVolunteers, attendingList, likes, volunteerList)
     VALUES
         ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 
-    `, [value]),
-  
+    `,
+    [
+      value.eventName,
+      value.eventType,
+      value.timeDate,
+      value.description,
+      value.image,
+      value.location,
+      value.enableVolunteers,
+      value.attendingList,
+      value.likes,
+      value.volunteerList,
+    ]
+  );
+  return res;
 }
 
+const deleteEvent = (module.exports = {
+  createUser,
+  getAllUsers,
 
-module.exports ={
-    createUser,
-    getAllUsers,
-    
-    createJourney,
-    
-    createEvent,
-}
+  createJourney,
+
+  createEvent,
+});
