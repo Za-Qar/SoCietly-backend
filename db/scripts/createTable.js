@@ -26,6 +26,7 @@ async function createJourney() {
   let res = await query(
     `CREATE TABLE journey(
             id SERIAL PRIMARY KEY,
+            uid INTEGER,
             employer TEXT,
             jobTitle TEXT,
             startDate DATE,
@@ -44,7 +45,9 @@ async function createEvents() {
               id SERIAL PRIMARY KEY,
               eventName TEXT,
               eventType TEXT,
-              timeDate DATE,
+              uid INTEGER,
+              date DATE,
+              time TIME
               description TEXT,
               image TEXT, 
               location TEXT, 

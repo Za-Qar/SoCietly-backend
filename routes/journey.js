@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { createJourney } = require("../models/items");
 
+/*---------Create Event---------*/
 router.post("/", async function (req, res) {
   let body = req.body;
 
