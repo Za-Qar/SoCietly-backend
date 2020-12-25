@@ -34,17 +34,6 @@ async function getAllUsers() {
 async function patchUsers(value, id) {
   console.log("this is value in items.js :", value);
   console.log("this is the id in items.js :", id);
-  const {
-    admin,
-    name,
-    email,
-    profileImage,
-    cohort,
-    currentRole,
-    currentEmployer,
-    skills,
-    introduction,
-  } = value;
   const res = await query(
     `UPDATE users
       SET admin = COALESCE($1, admin),
@@ -56,20 +45,29 @@ async function patchUsers(value, id) {
       currentEmployer = COALESCE($7, currentEmployer),
       skills = COALESCE($8, skills),
       introduction = COALESCE($9, introduction)
-      WHERE id = ${id}
-      `
+    WHERE id = ${id}
+      `,
+    [
+      value.admin,
+      value.name,
+      value.email,
+      value.profileImage,
+      value.cohort,
+      value.currentRole,
+      value.currentEmployer,
+      value.skills,
+      value.introduction,
+    ]
   );
+
   return res;
 }
 
 /*-----------DELETE: user------------*/
 async function deleteUser(id) {
-  console.log("id in items.js deleteUser function: ", id);
-
   const result = await query(`
   DELETE FROM users WHERE id=${id};
   `);
-
   console.log(result);
 }
 
@@ -84,6 +82,21 @@ async function createJourney(value) {
       value.startDate,
       value.description,
     ]
+  );
+  return res;
+}
+
+/*-----------PATCH: Journey Patch------------*/
+async function patchJourney(value, id) {
+  const res = await query(
+    `UPDATE journey
+      SET employer = COALESCE($1, employer),
+      jobTitle = COALESCE($2, jobTitle), 
+      startDate = COALESCE($3, startDate),
+      description = COALESCE($4, description),
+      WHERE id = ${id}
+      `,
+    [value.employer, value.jobTitle, value.startDate, value.description]
   );
   return res;
 }
@@ -127,34 +140,9 @@ async function deleteEvent(id) {
   console.log(result);
 }
 
-module.exports = {
-  createUser,
-  getAllUsers,
-  deleteUser,
-  patchUsers,
-
-  createJourney,
-
-  createEvent,
-  deleteEvent,
-};
-
 // /*-----------PATCH: Events Patch------------*/
 
 async function patchEvents(value, id) {
-  const {
-    eventName,
-    eventType,
-    uid,
-    date,
-    time,
-    description,
-    image,
-    location,
-    enableVolunteers,
-    likes,
-    volunteerList,
-  } = value;
   const res = await query(
     `UPDATE events
       SET eventName = COALESCE($1, eventName),
@@ -170,26 +158,35 @@ async function patchEvents(value, id) {
       likes = COALESCE($11, likes),
       volunteerList = COALESCE($12, volunteerList),
       WHERE id = ${id}
-      `
+      `,
+    [
+      value.eventName,
+      value.eventType,
+      value.uid,
+      value.date,
+      value.time,
+      value.description,
+      value.image,
+      value.location,
+      value.enableVolunteers,
+      value.likes,
+      value.volunteerList,
+    ]
   );
   return res;
 }
 
-// /*-----------PATCH: Journey Patch------------*/
+module.exports = {
+  createUser,
+  getAllUsers,
+  deleteUser,
+  patchUsers,
 
-async function patchJourney(value, id) {
-  const { employer, jobTitle, startDate, description } = value;
-  const res = await query(
-    `UPDATE journey
-      SET employer = COALESCE($1, employer),
-      jobTitle = COALESCE($2, jobTitle), 
-      startDate = COALESCE($3, startDate),
-      description = COALESCE($4, description),
-      WHERE id = ${id}
-      `
-  );
-  return res;
-}
+  createJourney,
+
+  createEvent,
+  deleteEvent,
+};
 
 // SELECT *
 // FROM Events
