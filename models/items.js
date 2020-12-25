@@ -25,7 +25,7 @@ async function createUser(value) {
 
 /*-----------GET: Get all Users------------*/
 async function getAllUsers() {
-  const res = query(`SELECT * FROM users`);
+  const res = await query(`SELECT * FROM users`);
   return res.rows;
 }
 
@@ -73,7 +73,7 @@ async function patchUsers(value, id) {
 /*-----------------------Journey-----------------------*/
 /*-----------POST: Create a Journey------------*/
 async function createJourney(value) {
-  const res = query(
+  const res = await query(
     `INSERT INTO journey (uid, employer, jobTitle, startDate, description) VALUES ($1, $2, $3, $4, $5)`,
     [
       value.uid,
@@ -88,7 +88,7 @@ async function createJourney(value) {
 
 /*-----------GET: Get all Journeys------------*/
 async function getAllJourneys() {
-  const res = query(`SELECT * FROM journey`);
+  const res = await query(`SELECT * FROM journey`);
   return res.rows;
 }
 
