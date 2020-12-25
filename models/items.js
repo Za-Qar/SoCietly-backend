@@ -1,7 +1,6 @@
 const { query } = require("../db/index");
 
 /*-----------------------USERS TABLE------------------------*/
-
 /*-----------POST: Creating a Users------------*/
 async function createUser(value) {
   const res = query(
@@ -63,15 +62,16 @@ async function patchUsers(value, id) {
   return res;
 }
 
-/*-----------DELETE: user------------*/
-async function deleteUser(id) {
-  const result = await query(`
-  DELETE FROM users WHERE id=${id};
-  `);
-  console.log(result);
-}
+// /*-----------DELETE: user------------*/
+// async function deleteUser(id) {
+//   const result = await query(`
+//   DELETE FROM users WHERE id=${id};
+//   `);
+//   console.log(result);
+// }
 
 /*-----------------------Journey-----------------------*/
+/*-----------POST: Create a Journey------------*/
 async function createJourney(value) {
   const res = query(
     `INSERT INTO journey (uid, employer, jobTitle, startDate, description) VALUES ($1, $2, $3, $4, $5)`,
@@ -84,6 +84,12 @@ async function createJourney(value) {
     ]
   );
   return res;
+}
+
+/*-----------GET: Get all Journeys------------*/
+async function getAllJourneys() {
+  const res = query(`SELECT * FROM journey`);
+  return res.rows;
 }
 
 /*-----------PATCH: Journey Patch------------*/
@@ -101,8 +107,15 @@ async function patchJourney(value, id) {
   return res;
 }
 
-/*-----------------------Events-----------------------*/
+// /*-----------DELETE: user------------*/
+// async function deleteJourney(id) {
+//   const result = await query(`
+//   DELETE FROM journey WHERE id=${id};
+//   `);
+//   console.log(result);
+// }
 
+/*-----------------------Events-----------------------*/
 /*-----------POST: Create event------------*/
 async function createEvent(value) {
   console.log("this is value in the createEvent models function: ", value);
@@ -132,17 +145,14 @@ async function createEvent(value) {
   return res;
 }
 
-/*-----------DELETE: Event------------*/
-async function deleteEvent(id) {
-  const result = await query(`
-  DELETE FROM events WHERE id=${id};
-  `);
-  console.log(result);
+/*-----------GET: All events------------*/
+async function getAllEvents() {
+  const res = await query(`SELECT * FROM events`);
+  return res.rows;
 }
 
-// /*-----------PATCH: Events Patch------------*/
-
-async function patchEvents(value, id) {
+/*-----------PATCH: Events Patch------------*/
+async function patchEvent(value, id) {
   const res = await query(
     `UPDATE events
       SET eventName = COALESCE($1, eventName),
@@ -176,16 +186,26 @@ async function patchEvents(value, id) {
   return res;
 }
 
+// /*-----------DELETE: Event------------*/
+// async function deleteEvent(id) {
+//   const result = await query(`
+//   DELETE FROM events WHERE id=${id};
+//   `);
+//   console.log(result);
+// }
+
 module.exports = {
   createUser,
   getAllUsers,
-  deleteUser,
   patchUsers,
 
   createJourney,
+  getAllJourneys,
+  patchJourney,
 
   createEvent,
-  deleteEvent,
+  getAllEvents,
+  patchEvent,
 };
 
 // SELECT *
