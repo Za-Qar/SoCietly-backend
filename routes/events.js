@@ -1,24 +1,34 @@
 var express = require("express");
 var router = express.Router();
 
-const { createEvent } = require("../models/items");
+const { createEvent, getAllEvents, patchEvent } = require("../models/events");
 
 /*---------Create Event---------*/
 router.post("/", async function (req, res) {
   let body = req.body;
-
-  console.log("this is body in routes function create event: ", body);
-
   const event = await createEvent(body);
   res.json(event);
 });
 
-/*---------Delete Event based on given id---------*/
-router.delete("/:id", async function (req, res) {
+/*---------Get all events---------*/
+router.get("/", async function (req, res) {
+  let events = await getAllEvents();
+  res.json({ success: true, payload: events });
+});
+
+router.patch("/:id", async function (req, res) {
   let id = req.params.id;
-  console.log("delete id, routes", id);
-  deleteEvent(id);
+  let body = req.body;
+  patchEvent(body, id);
   return res.json({ success: true });
 });
+
+/*---------Delete Event based on given id---------*/
+// router.delete("/:id", async function (req, res) {
+//   let id = req.params.id;
+//   console.log("delete id, routes", id);
+//   deleteEvent(id);
+//   return res.json({ success: true });
+// });
 
 module.exports = router;

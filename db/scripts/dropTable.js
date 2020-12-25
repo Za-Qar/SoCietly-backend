@@ -14,7 +14,7 @@ async function dropTableJourney() {
   console.log(res);
 }
 
-dropTableJourney();
+// dropTableJourney();
 
 /*-------------Drop Table Users Table-------------*/
 async function dropTableUsers() {
@@ -22,4 +22,4 @@ async function dropTableUsers() {
   console.log(res);
 }
 
-dropTableUsers();
+// dropTableUsers();
