@@ -1,33 +1,32 @@
 const { query } = require("../index");
 
-/*-------------Create Events Table-------------*/
-async function createEvents() {
+/*-------------Create Users Table-------------*/
+async function createUsers() {
   let res = await query(
-    `CREATE TABLE events(
-            id SERIAL PRIMARY KEY,
-            eventName TEXT,
-            eventType TEXT,
-            timeDate DATE,
-            description TEXT,
-            image TEXT, 
-            location TEXT, 
-            enableVolunteers BOOL,
-            attendingList TEXT,
-            likes INTEGER,
-            volunteerList TEXT
-
-        )`
+    `CREATE TABLE users(
+              id SERIAL PRIMARY KEY,
+              admin BOOL,
+              name TEXT,
+              email TEXT,
+              profileImage TEXT,
+              cohort INTEGER,
+              currentRole TEXT,
+              currentEmployer TEXT,
+              skills TEXT,
+              introduction TEXT
+          )`
   );
   console.log(res);
 }
 
-createEvents();
+createUsers();
 
 /*-------------Create Journey Table-------------*/
 async function createJourney() {
   let res = await query(
     `CREATE TABLE journey(
             id SERIAL PRIMARY KEY,
+            uid INTEGER,
             employer TEXT,
             jobTitle TEXT,
             startDate DATE,
@@ -39,23 +38,27 @@ async function createJourney() {
 
 createJourney();
 
-/*-------------Create Users Table-------------*/
-async function createUsers() {
+/*-------------Create Events Table-------------*/
+async function createEvents() {
   let res = await query(
-    `CREATE TABLE users(
-            id SERIAL PRIMARY KEY,
-            admin BOOL,
-            name TEXT,
-            email TEXT,
-            profileImage TEXT,
-            cohort INTEGER,
-            currentRole TEXT,
-            currentEmployer TEXT,
-            skills TEXT,
-            introduction TEXT
-        )`
+    `CREATE TABLE events(
+              id SERIAL PRIMARY KEY,
+              eventName TEXT,
+              eventType TEXT,
+              uid INTEGER,
+              date DATE,
+              time TIME
+              description TEXT,
+              image TEXT, 
+              location TEXT, 
+              enableVolunteers BOOL,
+              attendingList TEXT,
+              likes INTEGER,
+              volunteerList TEXT
+  
+          )`
   );
   console.log(res);
 }
 
-createUsers();
+createEvents();
