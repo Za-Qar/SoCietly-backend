@@ -1,24 +1,29 @@
 var express = require("express");
 var router = express.Router();
 
-const { createJourney } = require("../models/items");
+const {
+  createJourney,
+  getAllJourneys,
+  patchJourney,
+} = require("../models/journey");
 
 /*---------Create Event---------*/
 router.post("/", async function (req, res) {
   let body = req.body;
-
-  console.log("body in journey.js", body);
-
   const journey = await createJourney(body);
-
-  console.log("body in journey.js", journey);
-
   res.json(journey);
 });
 
-// /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
+router.get("/", async function (req, res) {
+  let journey = await getAllJourneys();
+  res.json({ success: true, payload: journey });
+});
+
+router.patch("/:id", async function (req, res) {
+  let id = req.params.id;
+  let body = req.body;
+  patchJourney(body, id);
+  return res.json({ success: true });
 });
 
 module.exports = router;
