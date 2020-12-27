@@ -29,6 +29,13 @@ async function getAllUsers() {
   return res.rows;
 }
 
+// /*-----------GET: Users by Email Address------------*/
+async function getUserByEmail(email) {
+  console.log("this is value in items.js: ", email);
+  const res = await query(`SELECT * FROM users WHERE email = $1`, [email]);
+  return res.rows;
+}
+
 // /*-----------PATCH: Users Patch------------*/
 async function patchUsers(value, id) {
   console.log("this is value in items.js :", value);
@@ -74,6 +81,7 @@ module.exports = {
   createUser,
   getAllUsers,
   patchUsers,
+  getUserByEmail,
 };
 
 // SELECT *
