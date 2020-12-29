@@ -16,9 +16,6 @@ var app = express();
 //cors error
 app.use(cors());
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -28,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/journey", journeysRouter);
 app.use("/events", eventsRouter);
-app.use("/user", usersRouter);
+app.use("/users", usersRouter);
 app.use("/userEvents", userEventsRouter);
 
 
@@ -45,7 +42,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.json({error:err});
 });
 
 module.exports = app;
