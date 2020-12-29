@@ -15,18 +15,32 @@ router.post("/", async function (req, res) {
   res.json(user);
 });
 
-/*---------GET: Get all users---------*/
+/*---------GET: Get all users or users by email---------*/
 router.get("/", async function (req, res) {
+  let { email } = req.query;
+  console.log(email);
+  if (email) {
+    let user = await getUserByEmail(email);
+    return res.json({ success: true, payload: user });
+  } 
   let users = await getAllUsers();
-  res.json({ success: true, payload: users });
-});
+  return res.json({ success: true, payload: users });
 
-/*---------GET: Get User by Email---------*/
-router.get("/email/:email", async function (req, res) {
-  let body = req.params.email;
-  let user = await getUserByEmail(body);
-  res.json({ success: true, payload: user });
 });
+//fetch(`http://localhost:3000/users?email=${email}&otherQueriesComeHere`)
+
+// /*---------GET: Get all users---------*/
+// router.get("/", async function (req, res) {
+//   let users = await getAllUsers();
+//   res.json({ success: true, payload: users });
+// });
+
+// /*---------GET: Get User by Email---------*/
+// router.get("/email/:email", async function (req, res) {
+//   let body = req.params.email;
+//   let user = await getUserByEmail(body);
+//   res.json({ success: true, payload: user });
+// });
 
 // /*---------DELETE: User---------*/
 // router.delete("/:id", async function (req, res) {
