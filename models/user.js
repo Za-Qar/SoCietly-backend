@@ -5,8 +5,8 @@ const { query } = require("../db/index");
 async function createUser(value) {
   const res = query(
     `
-    INSERT INTO users (admin, name, email, profileImage, cohort, currentRole, currentEmployer, skills, introduction)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    INSERT INTO users (admin, name, email, profileImage, cohort, currentRole, currentEmployer, skills, introduction, social)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     `,
     [
       value.admin,
@@ -18,6 +18,7 @@ async function createUser(value) {
       value.currentEmployer,
       value.skills,
       value.introduction,
+      value.social,
     ]
   );
   return res;
@@ -50,7 +51,8 @@ async function patchUsers(value, id) {
       currentRole = COALESCE($6, currentRole),
       currentEmployer = COALESCE($7, currentEmployer),
       skills = COALESCE($8, skills),
-      introduction = COALESCE($9, introduction)
+      introduction = COALESCE($9, introduction),
+      social = COALESCE($10, social)
     WHERE id = ${id}
       `,
     [
@@ -63,6 +65,7 @@ async function patchUsers(value, id) {
       value.currentEmployer,
       value.skills,
       value.introduction,
+      value.social,
     ]
   );
 
@@ -84,7 +87,3 @@ module.exports = {
   getUserByEmail,
 };
 
-// SELECT *
-// FROM Events
-// LEFT JOIN users
-// ON Events.uid = users.id
