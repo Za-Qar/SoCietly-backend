@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const { patchUserEvent, getUserEvents } = require("../models/userEvents");
+const { getUserEvents } = require("../models/userEvents");
 
 router.patch("/:id/:uid", async function (req, res) {
     let uid = req.params.uid;
