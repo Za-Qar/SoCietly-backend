@@ -38,7 +38,7 @@ async function createJourney() {
   console.log(res);
 }
 
-// createJourney();
+createJourney();
 
 /*-------------Create Events Table-------------*/
 async function createEvents() {
@@ -63,4 +63,4 @@ async function createEvents() {
   console.log(res);
 }
 
-createEvents();
+// createEvents();

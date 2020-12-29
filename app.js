@@ -10,6 +10,7 @@ var journeysRouter = require("./routes/journey");
 var usersRouter = require("./routes/user");
 var eventsRouter = require("./routes/events");
 var userEventsRouter = require("./routes/userEvents");
+var userJourneysRouter = require("./routes/userJourneys");
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use("/journey", journeysRouter);
 app.use("/events", eventsRouter);
 app.use("/users", usersRouter);
 app.use("/userEvents", userEventsRouter);
+app.use("/userJourneys", userJourneysRouter);
 
 
 // catch 404 and forward to error handler
