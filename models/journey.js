@@ -4,12 +4,13 @@ const { query } = require("../db/index");
 /*-----------POST: Create a Journey------------*/
 async function createJourney(value) {
   const res = await query(
-    `INSERT INTO journey (uid, employer, jobTitle, startDate, description) VALUES ($1, $2, $3, $4, $5)`,
+    `INSERT INTO journey (uid, employer, jobTitle, startDate, endDate, description) VALUES ($1, $2, $3, $4, $5, $6)`,
     [
       value.uid,
       value.employer,
       value.jobTitle,
       value.startDate,
+      value.endDate,
       value.description,
     ]
   );
@@ -30,7 +31,8 @@ async function patchJourney(value, id) {
       employer = COALESCE($2, employer),
       jobTitle = COALESCE($3, jobTitle), 
       startDate = COALESCE($4, startDate),
-      description = COALESCE($5, description)
+      endDate = COALESCE($5, endDate),
+      description = COALESCE($6, description)
       WHERE id = ${id}
       `,
     [
@@ -38,6 +40,7 @@ async function patchJourney(value, id) {
       value.employer,
       value.jobTitle,
       value.startDate,
+      value.endDate,
       value.description,
     ]
   );

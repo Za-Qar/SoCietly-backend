@@ -12,8 +12,9 @@ async function createUsers() {
               cohort INTEGER,
               currentRole TEXT,
               currentEmployer TEXT,
-              skills TEXT,
-              introduction TEXT
+              skills TEXT[],
+              introduction TEXT,
+              social TEXT[]
           )`
   );
   console.log(res);
@@ -30,7 +31,8 @@ async function createJourney() {
             employer TEXT,
             jobTitle TEXT,
             startDate DATE,
-            description TEXT
+            endDate DATE,
+            description TEXT 
         )`
   );
   console.log(res);
@@ -50,11 +52,11 @@ async function createEvents() {
               time TIME,
               description TEXT,
               image TEXT, 
-              location TEXT, 
+              location TEXT[], 
               enableVolunteers BOOL,
-              attendingList TEXT,
+              attendingList TEXT[],
               likes INTEGER,
-              volunteerList TEXT
+              volunteerList TEXT[]
   
           )`
   );
