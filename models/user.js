@@ -26,7 +26,7 @@ async function createUser(value) {
 
 /*-----------GET: Get all Users------------*/
 async function getAllUsers() {
-  const res = await query(`SELECT * FROM users`);
+  const res = await query(`SELECT * FROM users ORDER BY id ASC`);
   return res.rows;
 }
 
@@ -86,4 +86,3 @@ module.exports = {
   patchUsers,
   getUserByEmail,
 };
-
