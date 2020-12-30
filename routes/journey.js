@@ -4,7 +4,7 @@ var router = express.Router();
 const {
   createJourney,
   getAllJourneys,
-  getJourneyByEmail,
+  getJourneyById,
   patchJourney,
   deleteJourney,
 } = require("../models/journey");
@@ -20,7 +20,7 @@ router.post("/", async function (req, res) {
 router.get("/", async function (req, res) {
   let { id } = req.query;
   if (id) {
-    let journey = await getJourneyByEmail(id);
+    let journey = await getJourneyById(id);
     return res.json({ success: true, payload: journey });
   }
   let journeys = await getAllJourneys();

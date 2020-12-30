@@ -23,8 +23,8 @@ async function getAllJourneys() {
   return res.rows;
 }
 
-/*-----------GET: Journey by Email Address------------*/
-async function getJourneyByEmail(id) {
+/*-----------GET: Journey by Id Address------------*/
+async function getJourneyById(id) {
   const res = await query(`SELECT * FROM journey WHERE uid = $1`, [id]);
   return res.rows;
 }
@@ -66,7 +66,7 @@ module.exports = {
   getAllJourneys,
   patchJourney,
   deleteJourney,
-  getJourneyByEmail,
+  getJourneyById,
 };
 
 // SELECT *
