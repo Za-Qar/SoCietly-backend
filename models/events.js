@@ -75,18 +75,19 @@ async function patchEvent(value, id) {
   return res;
 }
 
-// /*-----------DELETE: Event------------*/
-// async function deleteEvent(id) {
-//   const result = await query(`
-//   DELETE FROM events WHERE id=${id};
-//   `);
-//   console.log(result);
-// }
+/*-----------DELETE: Event------------*/
+async function deleteEvent(id) {
+  const result = await query(`
+  DELETE FROM events WHERE id=${id};
+  `);
+  console.log(result);
+}
 
 module.exports = {
   createEvent,
   getAllEvents,
   patchEvent,
+  deleteEvent,
 };
 
 // SELECT *

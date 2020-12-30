@@ -17,19 +17,17 @@ var app = express();
 //cors error
 app.use(cors());
 
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/journey", journeysRouter);
+app.use("/journeys", journeysRouter);
 app.use("/events", eventsRouter);
 app.use("/users", usersRouter);
 app.use("/userEvents", userEventsRouter);
 app.use("/userJourneys", userJourneysRouter);
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -44,7 +42,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.json({error:err});
+  res.json({ error: err });
 });
 
 module.exports = app;

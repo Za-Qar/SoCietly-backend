@@ -30,7 +30,7 @@ async function getAllUsers() {
   return res.rows;
 }
 
-// /*-----------GET: Users by Email Address------------*/
+/*-----------GET: Users by Email Address------------*/
 async function getUserByEmail(email) {
   console.log("this is value in items.js: ", email);
   const res = await query(`SELECT * FROM users WHERE email = $1`, [email]);
@@ -72,17 +72,18 @@ async function patchUsers(value, id) {
   return res;
 }
 
-// /*-----------DELETE: user------------*/
-// async function deleteUser(id) {
-//   const result = await query(`
-//   DELETE FROM users WHERE id=${id};
-//   `);
-//   console.log(result);
-// }
+/*-----------DELETE: user------------*/
+async function deleteUser(id) {
+  const result = await query(`
+  DELETE FROM users WHERE id=${id};
+  `);
+  console.log(result);
+}
 
 module.exports = {
   createUser,
   getAllUsers,
   patchUsers,
   getUserByEmail,
+  deleteUser,
 };
