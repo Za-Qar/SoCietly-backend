@@ -7,6 +7,7 @@ async function createUsers() {
               id SERIAL PRIMARY KEY,
               admin BOOL,
               name TEXT,
+              surname TEXT,
               email TEXT,
               profileImage TEXT,
               cohort INTEGER,

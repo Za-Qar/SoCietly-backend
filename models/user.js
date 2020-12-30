@@ -6,11 +6,12 @@ async function createUser(value) {
   const res = query(
     `
     INSERT INTO users (admin, name, email, profileImage, cohort, currentRole, currentEmployer, skills, introduction, social)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,  $11)
     `,
     [
       value.admin,
       value.name,
+      value.surname,
       value.email,
       value.profileImage,
       value.cohort,
@@ -26,7 +27,9 @@ async function createUser(value) {
 
 /*-----------GET: Get all Users------------*/
 async function getAllUsers() {
-  const res = await query(`SELECT * FROM users ORDER BY id ASC`);
+  const res = await query(
+    `SELECT * FROM users ORDER BY cohort ASC, surname ASC`
+  );
   return res.rows;
 }
 
@@ -39,12 +42,11 @@ async function getUserByEmail(email) {
 
 // /*-----------PATCH: Users Patch------------*/
 async function patchUsers(value, id) {
-  console.log("this is value in items.js :", value);
-  console.log("this is the id in items.js :", id);
   const res = await query(
     `UPDATE users
       SET admin = COALESCE($1, admin),
-      name = COALESCE($2, name), 
+      name = COALESCE($2, name),
+      surname = COALESCE($11, surname),
       email = COALESCE($3, email),
       profileImage = COALESCE($4, profileImage),
       cohort = COALESCE($5, cohort),
@@ -66,6 +68,7 @@ async function patchUsers(value, id) {
       value.skills,
       value.introduction,
       value.social,
+      value.surname,
     ]
   );
 
