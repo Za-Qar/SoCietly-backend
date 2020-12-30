@@ -21,7 +21,7 @@ async function createUsers() {
   console.log(res);
 }
 
-// createUsers();
+createUsers();
 
 /*-------------Create Journey Table-------------*/
 async function createJourney() {
@@ -64,4 +64,4 @@ async function createEvents() {
   console.log(res);
 }
 
-// createEvents();
+createEvents();
