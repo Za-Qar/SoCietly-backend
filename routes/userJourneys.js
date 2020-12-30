@@ -1,12 +1,19 @@
 var express = require("express");
 var router = express.Router();
 
-const { getUserJourneys } = require("../models/userJourneys");
+const {
+  getUserJourneysById,
+  getAllUserJourneys,
+} = require("../models/userJourneys");
 
-router.get("/:id", async function (req, res) {
-  let { id } = req.params;
-  let events = await getUserJourneys(id);
-  res.json({ success: true, payload: events });
+router.get("/", async function (req, res) {
+  let { id } = req.query;
+  if (id) {
+    let journeys = await getUserJourneysById(id);
+    return res.json({ success: true, payload: journeys });
+  }
+  let journeys = await getAllUserJourneys();
+  return res.json({ success: true, payload: journeys });
 });
 
 module.exports = router;
