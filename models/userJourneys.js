@@ -5,7 +5,8 @@ async function getUserJourneys(id) {
   const res = await query(` SELECT * FROM journey
     LEFT JOIN users
     ON journey.uid = users.id
-    WHERE journey.uid = ${id} AND users.id = ${id};`);
+    WHERE journey.uid = ${id} AND users.id = ${id}
+    ORDER BY users.cohort ASC, users.surname ASC;`);
   return res.rows;
 }
 
