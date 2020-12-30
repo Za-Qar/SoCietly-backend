@@ -19,7 +19,7 @@ async function createJourney(value) {
 
 /*-----------GET: Get all Journeys------------*/
 async function getAllJourneys() {
-  const res = await query(`SELECT * FROM journey`);
+  const res = await query(`SELECT * FROM journey ORDER BY startDate DESC`);
   return res.rows;
 }
 
