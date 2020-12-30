@@ -6,7 +6,8 @@
     "start": "nodemon ./bin/www",
     "dev": "node ./bin/www",
     "createTable": "node -r dotenv/config ./db/scripts/createTable.js",
-    "dropTable": "node -r dotenv/config ./db/scripts/dropTable.js"
+    "dropTable": "node -r dotenv/config ./db/scripts/dropTable.js",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,5 +24,8 @@
   "main": "app.js",
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "cypress": "^6.2.0"
+  }
 }
