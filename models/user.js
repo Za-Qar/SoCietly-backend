@@ -55,7 +55,7 @@ async function patchUsers(value, id) {
       skills = COALESCE($8, skills),
       introduction = COALESCE($9, introduction),
       social = COALESCE($10, social)
-    WHERE id = ${id}
+    WHERE id = $12
       `,
     [
       value.admin,
@@ -69,6 +69,7 @@ async function patchUsers(value, id) {
       value.introduction,
       value.social,
       value.surname,
+      id,
     ]
   );
 
