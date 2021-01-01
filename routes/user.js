@@ -9,6 +9,8 @@ const {
   patchUsers,
   getUserByEmail,
   deleteUser,
+
+  imageTest,
 } = require("../models/user");
 
 /*---------Create User---------*/
@@ -86,10 +88,12 @@ router.post("/upload", function (req, res) {
       /* prettier-ignore */
       `${req.body.myImage}`
     )
-      .then((response) => console.log(response))
+      .then((response) => imageTest(response.image.url))
       .catch((error) => console.error(error));
 
-    /*Now do where ever you want to do*/
+    /*-------UPLOAD TO DB TEST-------*/
+
+    /*-------FOR ERRORS-------*/
     if (!err) {
       return res.sendStatus(200).end();
     }
