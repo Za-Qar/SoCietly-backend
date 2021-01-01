@@ -62,21 +62,21 @@ router.patch("/:id", async function (req, res) {
   return res.json({ success: true });
 });
 
-/*---------TEST: Upload Image---------*/
-const path = require("path");
-const multer = require("multer");
+// /*---------TEST: Upload Image---------*/
+// const path = require("path");
+// const multer = require("multer");
 
-const storage = multer.diskStorage({
-  destination: "./public/uploads/",
-  filename: function (req, file, cb) {
-    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: "./public/uploads/",
+//   filename: function (req, file, cb) {
+//     cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+//   },
+// });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 1000000 },
-}).single("myImage");
+// const upload = multer({
+//   storage: storage,
+//   limits: { fileSize: 1000000 },
+// }).single("myImage");
 
 // router.post("/upload", function (req, res) {
 //   upload(req, res, function (err) {
