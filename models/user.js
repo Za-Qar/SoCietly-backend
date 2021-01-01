@@ -55,7 +55,7 @@ async function patchUsers(value, id) {
       skills = COALESCE($8, skills),
       introduction = COALESCE($9, introduction),
       social = COALESCE($10, social)
-    WHERE id = ${id}
+    WHERE id = $12
       `,
     [
       value.admin,
@@ -69,6 +69,7 @@ async function patchUsers(value, id) {
       value.introduction,
       value.social,
       value.surname,
+      id,
     ]
   );
 
@@ -83,10 +84,26 @@ async function deleteUser(id) {
   console.log(result);
 }
 
+/*-----------IMAGE UPLOAD TEST------------*/
+/*-----------POST: Creating a Users------------*/
+async function imageTest(value) {
+  const res = query(
+    `
+    INSERT INTO users (profileImage)
+    VALUES($1)
+    `,
+    [value]
+  );
+  console.log("this is value in models.js: ", value);
+  return res;
+}
+
 module.exports = {
   createUser,
   getAllUsers,
   patchUsers,
   getUserByEmail,
   deleteUser,
+
+  imageTest,
 };
