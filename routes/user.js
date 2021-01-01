@@ -1,12 +1,16 @@
 var express = require("express");
 var router = express.Router();
 
+const imgbbUploader = require("imgbb-uploader");
+
 const {
   createUser,
   getAllUsers,
   patchUsers,
   getUserByEmail,
   deleteUser,
+
+  imageTest,
 } = require("../models/user");
 
 /*---------Create User---------*/
@@ -57,5 +61,43 @@ router.patch("/:id", async function (req, res) {
   patchUsers(body, id);
   return res.json({ success: true });
 });
+
+/*---------TEST: Upload Image---------*/
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function (req, file, cb) {
+    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+}).single("myImage");
+
+router.post("/upload", function (req, res) {
+  upload(req, res, function (err) {
+    console.log("Request ---", req.body);
+    console.log("Request file ---", req.body.myImage); //Here you get file.
+
+    imgbbUploader(
+      "3e52ce2227d376d601590e5c3e9d9a51",
+      /* prettier-ignore */
+      `${req.body.myImage}`
+    )
+      .then((response) => imageTest(response.image.url))
+      .catch((error) => console.error(error));
+
+    /*-------UPLOAD TO DB TEST-------*/
+
+    /*-------FOR ERRORS-------*/
+    if (!err) {
+      return res.sendStatus(200).end();
+    }
+  });
+// });
 
 module.exports = router;
