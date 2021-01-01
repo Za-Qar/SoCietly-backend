@@ -84,7 +84,7 @@ router.post("/upload", function (req, res) {
     imgbbUploader(
       "3e52ce2227d376d601590e5c3e9d9a51",
       /* prettier-ignore */
-      "DSC00310.JPG"
+      `${req.body.myImage}`
     )
       .then((response) => console.log(response))
       .catch((error) => console.error(error));
