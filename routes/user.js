@@ -10,7 +10,7 @@ const {
   getUserByEmail,
   deleteUser,
 
-  imageTest,
+  // imageTest,
 } = require("../models/user");
 
 /*---------Create User---------*/
@@ -78,26 +78,26 @@ const upload = multer({
   limits: { fileSize: 1000000 },
 }).single("myImage");
 
-router.post("/upload", function (req, res) {
-  upload(req, res, function (err) {
-    console.log("Request ---", req.body);
-    console.log("Request file ---", req.body.myImage); //Here you get file.
+// router.post("/upload", function (req, res) {
+//   upload(req, res, function (err) {
+//     console.log("Request ---", req.body);
+//     console.log("Request file ---", req.body.myImage); //Here you get file.
 
-    imgbbUploader(
-      "3e52ce2227d376d601590e5c3e9d9a51",
-      /* prettier-ignore */
-      `${req.body.myImage}`
-    )
-      .then((response) => imageTest(response.image.url))
-      .catch((error) => console.error(error));
+//     imgbbUploader(
+//       "3e52ce2227d376d601590e5c3e9d9a51",
+//       /* prettier-ignore */
+//       `${req.body.myImage}`
+//     )
+//       .then((response) => imageTest(response.image.url))
+//       .catch((error) => console.error(error));
 
-    /*-------UPLOAD TO DB TEST-------*/
+//     /*-------UPLOAD TO DB TEST-------*/
 
-    /*-------FOR ERRORS-------*/
-    if (!err) {
-      return res.sendStatus(200).end();
-    }
-  });
-});
+//     /*-------FOR ERRORS-------*/
+//     if (!err) {
+//       return res.sendStatus(200).end();
+//     }
+//   });
+// });
 
 module.exports = router;

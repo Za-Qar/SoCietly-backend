@@ -84,19 +84,19 @@ async function deleteUser(id) {
   console.log(result);
 }
 
-/*-----------IMAGE UPLOAD TEST------------*/
-/*-----------POST: Creating a Users------------*/
-async function imageTest(value) {
-  const res = query(
-    `
-    INSERT INTO users (profileImage)
-    VALUES($1)
-    `,
-    [value]
-  );
-  console.log("this is value in models.js: ", value);
-  return res;
-}
+// /*-----------IMAGE UPLOAD TEST------------*/
+// /*-----------POST: Creating a Users------------*/
+// async function imageTest(value) {
+//   const res = query(
+//     `
+//     INSERT INTO users (profileImage)
+//     VALUES($1)
+//     `,
+//     [value]
+//   );
+//   console.log("this is value in models.js: ", value);
+//   return res;
+// }
 
 module.exports = {
   createUser,
@@ -105,5 +105,5 @@ module.exports = {
   getUserByEmail,
   deleteUser,
 
-  imageTest,
+  // imageTest,
 };
