@@ -1,5 +1,11 @@
 var express = require("express");
 var router = express.Router();
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const {
   createUser,
@@ -7,6 +13,8 @@ const {
   patchUsers,
   getUserByEmail,
   deleteUser,
+
+  imageUpload,
 } = require("../models/user");
 
 /*---------Create User---------*/
@@ -56,6 +64,24 @@ router.patch("/:id", async function (req, res) {
   let body = req.body;
   patchUsers(body, id);
   return res.json({ success: true });
+});
+
+/*---------POST: IMAGE UPLOAD TEST---------*/
+router.post("/imageupload", async function (req, res) {
+  let body = req.body.image;
+  imageUpload(body);
+  return res.json({ success: true });
+});
+
+/*---------POST: IMAGE UPLOAD TEST---------*/
+router.get("/imageupload", async function (req, res) {
+  const { resources } = await cloudinary.search
+    .expression("folder:falcon5iveImages")
+    .sort_by("public_id", "desc")
+    .max_results(30)
+    .execute();
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
 });
 
 module.exports = router;

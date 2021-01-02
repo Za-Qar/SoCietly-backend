@@ -1,4 +1,10 @@
 const { query } = require("../db/index");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 /*-----------------------USERS TABLE------------------------*/
 /*-----------POST: Creating a Users------------*/
@@ -84,10 +90,20 @@ async function deleteUser(id) {
   console.log(result);
 }
 
+async function imageUpload(image) {
+  console.log(image);
+  const uploaded = await cloudinary.uploader.upload(image, {
+    upload_preset: "falcon5iveImages",
+  });
+  console.log(uploaded);
+}
+
 module.exports = {
   createUser,
   getAllUsers,
   patchUsers,
   getUserByEmail,
   deleteUser,
+
+  imageUpload,
 };
