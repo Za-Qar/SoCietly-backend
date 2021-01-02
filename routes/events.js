@@ -21,6 +21,7 @@ router.get("/", async function (req, res) {
   res.json({ success: true, payload: events });
 });
 
+/*---------Patch event by id---------*/
 router.patch("/:id", async function (req, res) {
   let id = req.params.id;
   let body = req.body;
