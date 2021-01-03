@@ -3,7 +3,7 @@ const { query } = require("../db/index");
 async function getUserEvents(id) {
   console.log("this is models id: ", id);
   const res = await query(`
-    SELECT Events.uid, users.id, users.name FROM Events
+    SELECT * FROM Events
     LEFT JOIN users
     ON Events.uid = users.id
     WHERE Events.uid = ${id} AND users.id= ${id};`);
