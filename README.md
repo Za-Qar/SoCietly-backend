@@ -24,9 +24,9 @@ http://localhost:3000/users
 
 # Get user by email
 
-????
+e.g. shanicebasra@outlook.com
 
-http://localhost:3000/users?email=
+http://localhost:3000/users?email=shanicebasra@outlook.com
 
 # Get note by specific database ID (where id is a number auto assigned by the database)
 
