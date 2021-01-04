@@ -1,11 +1,20 @@
 var express = require("express");
 var router = express.Router();
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const {
   createUser,
   getAllUsers,
   patchUsers,
   getUserByEmail,
+  deleteUser,
+
+  imageUpload,
 } = require("../models/user");
 
 /*---------Create User---------*/
@@ -22,10 +31,9 @@ router.get("/", async function (req, res) {
   if (email) {
     let user = await getUserByEmail(email);
     return res.json({ success: true, payload: user });
-  } 
+  }
   let users = await getAllUsers();
   return res.json({ success: true, payload: users });
-
 });
 //fetch(`http://localhost:3000/users?email=${email}&otherQueriesComeHere`)
 
@@ -42,13 +50,13 @@ router.get("/", async function (req, res) {
 //   res.json({ success: true, payload: user });
 // });
 
-// /*---------DELETE: User---------*/
-// router.delete("/:id", async function (req, res) {
-//   let id = req.params.id;
-//   console.log("delete id, routes: ", id);
-//   deleteUser(id);
-//   return res.json({ success: true });
-// });
+/*---------DELETE: User---------*/
+router.delete("/:id", async function (req, res) {
+  let id = req.params.id;
+  console.log("delete id, routes: ", id);
+  deleteUser(id);
+  return res.json({ success: true });
+});
 
 /*---------PATCH: User---------*/
 router.patch("/:id", async function (req, res) {
@@ -58,9 +66,22 @@ router.patch("/:id", async function (req, res) {
   return res.json({ success: true });
 });
 
-module.exports = router;
+/*---------POST: IMAGE UPLOAD TEST---------*/
+router.post("/imageupload", async function (req, res) {
+  let body = req.body.image;
+  imageUpload(body);
+  return res.json({ success: true });
+});
 
-// /*---------GET: Get all users---------*/
-// router.get("/", function (req, res, next) {
-//   res.send("respond with a resource");
-// });
+/*---------POST: IMAGE UPLOAD TEST---------*/
+router.get("/imageupload", async function (req, res) {
+  const { resources } = await cloudinary.search
+    .expression("folder:falcon5iveImages")
+    .sort_by("public_id", "desc")
+    .max_results(30)
+    .execute();
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
+});
+
+module.exports = router;

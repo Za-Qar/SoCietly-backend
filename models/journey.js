@@ -19,7 +19,13 @@ async function createJourney(value) {
 
 /*-----------GET: Get all Journeys------------*/
 async function getAllJourneys() {
-  const res = await query(`SELECT * FROM journey`);
+  const res = await query(`SELECT * FROM journey ORDER BY startDate DESC`);
+  return res.rows;
+}
+
+/*-----------GET: Journey by Id Address------------*/
+async function getJourneyById(id) {
+  const res = await query(`SELECT * FROM journey WHERE uid = $1`, [id]);
   return res.rows;
 }
 
@@ -47,18 +53,20 @@ async function patchJourney(value, id) {
   return res;
 }
 
-// /*-----------DELETE: Journey------------*/
-// async function deleteJourney(id) {
-//   const result = await query(`
-//   DELETE FROM journey WHERE id=${id};
-//   `);
-//   console.log(result);
-// }
+/*-----------DELETE: Journey------------*/
+async function deleteJourney(id) {
+  const result = await query(`
+  DELETE FROM journey WHERE id=${id};
+  `);
+  console.log(result);
+}
 
 module.exports = {
   createJourney,
   getAllJourneys,
   patchJourney,
+  deleteJourney,
+  getJourneyById,
 };
 
 // SELECT *

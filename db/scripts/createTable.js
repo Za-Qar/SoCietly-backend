@@ -7,6 +7,7 @@ async function createUsers() {
               id SERIAL PRIMARY KEY,
               admin BOOL,
               name TEXT,
+              surname TEXT,
               email TEXT,
               profileImage TEXT,
               cohort INTEGER,
@@ -38,7 +39,7 @@ async function createJourney() {
   console.log(res);
 }
 
-createJourney();
+// createJourney();
 
 /*-------------Create Events Table-------------*/
 async function createEvents() {
@@ -52,7 +53,7 @@ async function createEvents() {
               time TIME,
               description TEXT,
               image TEXT, 
-              location TEXT[], 
+              location TEXT, 
               enableVolunteers BOOL,
               attendingList TEXT[],
               likes INTEGER,
@@ -63,4 +64,4 @@ async function createEvents() {
   console.log(res);
 }
 
-// createEvents();
+createEvents();

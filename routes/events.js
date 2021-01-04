@@ -1,7 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-const { createEvent, getAllEvents, patchEvent } = require("../models/events");
+const {
+  createEvent,
+  getAllEvents,
+  patchEvent,
+  deleteEvent,
+} = require("../models/events");
 
 /*---------Create Event---------*/
 router.post("/", async function (req, res) {
@@ -16,6 +21,7 @@ router.get("/", async function (req, res) {
   res.json({ success: true, payload: events });
 });
 
+/*---------Patch event by id---------*/
 router.patch("/:id", async function (req, res) {
   let id = req.params.id;
   let body = req.body;
@@ -24,11 +30,11 @@ router.patch("/:id", async function (req, res) {
 });
 
 /*---------Delete Event based on given id---------*/
-// router.delete("/:id", async function (req, res) {
-//   let id = req.params.id;
-//   console.log("delete id, routes", id);
-//   deleteEvent(id);
-//   return res.json({ success: true });
-// });
+router.delete("/:id", async function (req, res) {
+  let id = req.params.id;
+  console.log("delete id, routes", id);
+  deleteEvent(id);
+  return res.json({ success: true });
+});
 
 module.exports = router;
