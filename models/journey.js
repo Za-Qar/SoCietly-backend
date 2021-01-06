@@ -25,7 +25,10 @@ async function getAllJourneys() {
 
 /*-----------GET: Journey by Id Address------------*/
 async function getJourneyById(id) {
-  const res = await query(`SELECT * FROM journey WHERE uid = $1`, [id]);
+  const res = await query(
+    `SELECT * FROM journey WHERE uid = $1 ORDER BY startDate DESC`,
+    [id]
+  );
   return res.rows;
 }
 
