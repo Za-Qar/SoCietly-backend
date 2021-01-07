@@ -46,6 +46,12 @@ async function getUserByEmail(email) {
   return res.rows;
 }
 
+/*-----------GET: Users by ID------------*/
+async function getUserByID(id) {
+  console.log("this is value in items.js: ", id);
+  const res = await query(`SELECT * FROM users WHERE id = $1`, [id]);
+  return res.rows;
+}
 // /*-----------PATCH: Users Patch------------*/
 async function patchUsers(value, id) {
   const res = await query(
@@ -103,6 +109,7 @@ module.exports = {
   getAllUsers,
   patchUsers,
   getUserByEmail,
+  getUserByID,
   deleteUser,
 
   imageUpload,
