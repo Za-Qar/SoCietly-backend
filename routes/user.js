@@ -12,6 +12,7 @@ const {
   getAllUsers,
   patchUsers,
   getUserByEmail,
+  getUserByID,
   deleteUser,
 
   imageUpload,
@@ -26,8 +27,13 @@ router.post("/", async function (req, res) {
 
 /*---------GET: Get all users or users by email---------*/
 router.get("/", async function (req, res) {
-  let { email } = req.query;
+  let { email, id } = req.query;
   console.log(email);
+  console.log(id);
+  if (id) {
+    let user = await getUserByID(id);
+    return res.json({ success: true, payload: user });
+  }
   if (email) {
     let user = await getUserByEmail(email);
     return res.json({ success: true, payload: user });
