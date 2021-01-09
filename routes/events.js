@@ -1,5 +1,11 @@
 var express = require("express");
 var router = express.Router();
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const {
   createEvent,
@@ -10,7 +16,9 @@ const {
 
 /*---------Create Event---------*/
 router.post("/", async function (req, res) {
+  console.log("this is the res:", res);
   let body = req.body;
+
   const event = await createEvent(body);
   res.json(event);
 });

@@ -1,9 +1,18 @@
 const { query } = require("../db/index");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 /*-----------------------Events-----------------------*/
 /*-----------POST: Create event------------*/
 async function createEvent(value) {
-  console.log("this is value in the createEvent models function: ", value);
+  // const uploaded = await cloudinary.uploader.upload(value.image, {
+  //   upload_preset: "falcon5iveImages",
+  // });
+  // console.log(uploaded);
 
   const res = await query(
     `
@@ -29,6 +38,14 @@ async function createEvent(value) {
     ]
   );
   return res;
+}
+
+async function imageUpload(image) {
+  console.log(image);
+  const uploaded = await cloudinary.uploader.upload(image, {
+    upload_preset: "falcon5iveImages",
+  });
+  console.log(uploaded);
 }
 
 /*-----------GET: All events------------*/
