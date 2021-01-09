@@ -9,10 +9,12 @@ cloudinary.config({
 /*-----------------------Events-----------------------*/
 /*-----------POST: Create event------------*/
 async function createEvent(value) {
-  // const uploaded = await cloudinary.uploader.upload(value.image, {
-  //   upload_preset: "falcon5iveImages",
-  // });
-  // console.log(uploaded);
+  console.log("this is the value in createEventEvent: ", value);
+
+  const uploaded = await cloudinary.uploader.upload(value.image, {
+    upload_preset: "falcon5iveImages",
+  });
+  // console.log(await uploaded.public_id);
 
   const res = await query(
     `
@@ -29,7 +31,7 @@ async function createEvent(value) {
       value.date,
       value.time,
       value.description,
-      value.image,
+      uploaded.public_id,
       value.location,
       value.enableVolunteers,
       value.attendingList,

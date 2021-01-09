@@ -16,9 +16,15 @@ const {
 
 /*---------Create Event---------*/
 router.post("/", async function (req, res) {
-  console.log("this is the res:", res);
-  let body = req.body;
+  const { resources } = await cloudinary.search
+    .expression("folder:falcon5iveImages")
+    .sort_by("public_id", "desc")
+    .max_results(30)
+    .execute();
+  const publicIds = resources.map((file) => file.public_id);
+  res.send(publicIds);
 
+  let body = req.body;
   const event = await createEvent(body);
   res.json(event);
 });
