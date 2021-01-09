@@ -45,7 +45,7 @@ async function createJourney() {
 async function createEvents() {
   let res = await query(
     `CREATE TABLE events(
-              id SERIAL PRIMARY KEY,
+              eventId SERIAL PRIMARY KEY,
               eventName TEXT,
               eventType TEXT,
               uid INTEGER,
