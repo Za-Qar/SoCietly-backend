@@ -6,7 +6,8 @@ async function getUserEvents(id) {
   SELECT * FROM Events
     LEFT JOIN users
     ON Events.uid = users.id
-    WHERE users.id= ${id};`);
+    WHERE users.id= ${id};
+    `);
   console.log("this is res.rows: ", res.rows);
   return res.rows;
 }
