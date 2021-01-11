@@ -57,7 +57,8 @@ async function createEvents() {
               enableVolunteers BOOL,
               attendingList TEXT[],
               likes INTEGER,
-              volunteerList TEXT[]
+              volunteerList TEXT[],
+              eventLink TEXT,
   
           )`
   );

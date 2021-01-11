@@ -52,7 +52,10 @@ async function imageUpload(image) {
 
 /*-----------GET: All events------------*/
 async function getAllEvents() {
-  const res = await query(`SELECT * FROM events`);
+  const res = await query(`
+  SELECT * FROM events  LEFT JOIN users
+  ON Events.uid = users.id;
+  `);
   return res.rows;
 }
 
@@ -74,7 +77,7 @@ async function patchEvent(value, id) {
       attendingList = COALESCE($10, attendingList),
       likes = COALESCE($11, likes),
       volunteerList = COALESCE($12, volunteerList)
-      WHERE id = ${id}
+      WHERE eventid = ${id}
       `,
     [
       value.eventName,
@@ -97,9 +100,20 @@ async function patchEvent(value, id) {
 /*-----------DELETE: Event------------*/
 async function deleteEvent(id) {
   const result = await query(`
-  DELETE FROM events WHERE id=${id};
+  DELETE FROM events WHERE eventid=${id};
   `);
   console.log(result);
+}
+
+/*-----------GET: Event by id------------*/
+async function getEventById(id) {
+  const res = await query(
+    `SELECT * FROM events  LEFT JOIN users
+  ON Events.uid = users.id
+  WHERE eventid = $1 ;`,
+    [id]
+  );
+  return res.rows;
 }
 
 module.exports = {
@@ -107,6 +121,7 @@ module.exports = {
   getAllEvents,
   patchEvent,
   deleteEvent,
+  getEventById,
 };
 
 // SELECT *

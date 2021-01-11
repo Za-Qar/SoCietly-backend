@@ -12,6 +12,7 @@ const {
   getAllEvents,
   patchEvent,
   deleteEvent,
+  getEventById,
 } = require("../models/events");
 
 /*---------Create Event---------*/
@@ -49,6 +50,13 @@ router.delete("/:id", async function (req, res) {
   console.log("delete id, routes", id);
   deleteEvent(id);
   return res.json({ success: true });
+});
+
+/*---------Get Event based on given id---------*/
+router.get("/:id", async function (req, res) {
+  let id = req.params.id;
+  let event = await getEventById(id);
+  return res.json({ success: true, payload: event });
 });
 
 module.exports = router;
