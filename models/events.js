@@ -1,9 +1,20 @@
 const { query } = require("../db/index");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 /*-----------------------Events-----------------------*/
 /*-----------POST: Create event------------*/
 async function createEvent(value) {
-  console.log("this is value in the createEvent models function: ", value);
+  console.log("this is the value in createEventEvent: ", value);
+
+  const uploaded = await cloudinary.uploader.upload(value.image, {
+    upload_preset: "falcon5iveImages",
+  });
+  // console.log(await uploaded.public_id);
 
   const res = await query(
     `
@@ -20,7 +31,7 @@ async function createEvent(value) {
       value.date,
       value.time,
       value.description,
-      value.image,
+      uploaded.public_id,
       value.location,
       value.enableVolunteers,
       value.attendingList,
@@ -31,9 +42,20 @@ async function createEvent(value) {
   return res;
 }
 
+async function imageUpload(image) {
+  console.log(image);
+  const uploaded = await cloudinary.uploader.upload(image, {
+    upload_preset: "falcon5iveImages",
+  });
+  console.log(uploaded);
+}
+
 /*-----------GET: All events------------*/
 async function getAllEvents() {
-  const res = await query(`SELECT * FROM events`);
+  const res = await query(`
+  SELECT * FROM events  LEFT JOIN users
+  ON Events.uid = users.id;
+  `);
   return res.rows;
 }
 
@@ -55,7 +77,7 @@ async function patchEvent(value, id) {
       attendingList = COALESCE($10, attendingList),
       likes = COALESCE($11, likes),
       volunteerList = COALESCE($12, volunteerList)
-      WHERE id = ${id}
+      WHERE eventid = ${id}
       `,
     [
       value.eventName,
@@ -78,9 +100,20 @@ async function patchEvent(value, id) {
 /*-----------DELETE: Event------------*/
 async function deleteEvent(id) {
   const result = await query(`
-  DELETE FROM events WHERE id=${id};
+  DELETE FROM events WHERE eventid=${id};
   `);
   console.log(result);
+}
+
+/*-----------GET: Event by id------------*/
+async function getEventById(id) {
+  const res = await query(
+    `SELECT * FROM events  LEFT JOIN users
+  ON Events.uid = users.id
+  WHERE eventid = $1 ;`,
+    [id]
+  );
+  return res.rows;
 }
 
 module.exports = {
@@ -88,6 +121,7 @@ module.exports = {
   getAllEvents,
   patchEvent,
   deleteEvent,
+  getEventById,
 };
 
 // SELECT *
