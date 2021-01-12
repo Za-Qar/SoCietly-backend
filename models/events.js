@@ -77,7 +77,7 @@ async function patchEvent(value, id) {
       enableVolunteers = COALESCE($9, enableVolunteers),
       attendingList = COALESCE($10, attendingList),
       likes = COALESCE($11, likes),
-      volunteerList = COALESCE($12, volunteerList)
+      volunteerList = COALESCE($12, volunteerList),
       eventLink = COALESCE($13, eventLink)
       WHERE eventid = ${id}
       `,
@@ -94,6 +94,7 @@ async function patchEvent(value, id) {
       value.attendingList,
       value.likes,
       value.volunteerList,
+      value.eventLink,
     ]
   );
   return res;
