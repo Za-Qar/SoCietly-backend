@@ -56,10 +56,9 @@ async function createEvents() {
               location TEXT, 
               enableVolunteers BOOL,
               attendingList TEXT[],
-              likes INTEGER,
+              likes TEXT[],
               volunteerList TEXT[],
-              eventLink TEXT,
-  
+              eventLink TEXT
           )`
   );
   console.log(res);

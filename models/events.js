@@ -19,9 +19,9 @@ async function createEvent(value) {
   const res = await query(
     `
     INSERT INTO events(
-        eventName, eventType, uid, date, time, description, image, location, enableVolunteers, attendingList, likes, volunteerList)
+        eventName, eventType, uid, date, time, description, image, location, enableVolunteers, attendingList, likes, volunteerList, eventLink)
     VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
 
     `,
     [
@@ -37,6 +37,7 @@ async function createEvent(value) {
       value.attendingList,
       value.likes,
       value.volunteerList,
+      value.eventLink,
     ]
   );
   return res;
@@ -77,6 +78,7 @@ async function patchEvent(value, id) {
       attendingList = COALESCE($10, attendingList),
       likes = COALESCE($11, likes),
       volunteerList = COALESCE($12, volunteerList)
+      eventLink = COALESCE($13, eventLink)
       WHERE eventid = ${id}
       `,
     [
