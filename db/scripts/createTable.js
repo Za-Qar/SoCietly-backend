@@ -59,7 +59,6 @@ async function createEvents() {
               likes INTEGER,
               volunteerList TEXT[],
               eventLink TEXT,
-  
           )`
   );
   console.log(res);
