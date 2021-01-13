@@ -7,7 +7,8 @@
     "dev": "node ./bin/www",
     "createTable": "node -r dotenv/config ./db/scripts/createTable.js",
     "dropTable": "node -r dotenv/config ./db/scripts/dropTable.js",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "mailer": "node ./routes/nodemailer.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

@@ -6,7 +6,6 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const nodemailer = require("nodemailer");
 
 const {
   createUser,
@@ -89,30 +88,6 @@ router.get("/imageupload", async function (req, res) {
     .execute();
   const publicIds = resources.map((file) => file.public_id);
   res.send(publicIds);
-});
-
-/*---------Nodemailer---------*/
-const transporter = nodemailer.createTransport({
-  service: "hotmail",
-  auth: {
-    user: "societly.soc@outlook.com ",
-    pass: "6miTY$aL#rX3y17At",
-  },
-});
-
-const options = {
-  from: "societly.soc@outlook.com ",
-  to: "za.qa@outlook.com",
-  subject: "Test nodemailer",
-  text: "hello, this is just a test",
-};
-
-transporter.sendMail(options, function (err, info) {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log("sent: ", info.response);
 });
 
 module.exports = router;
