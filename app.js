@@ -11,7 +11,7 @@ var usersRouter = require("./routes/user");
 var eventsRouter = require("./routes/events");
 var userEventsRouter = require("./routes/userEvents");
 var userJourneysRouter = require("./routes/userJourneys");
-
+var nodemailer = require("./routes/nodemailer");
 // var bodyParser = require("body-parser");
 
 var app = express();
@@ -30,7 +30,7 @@ app.use("/events", eventsRouter);
 app.use("/users", usersRouter);
 app.use("/userEvents", userEventsRouter);
 app.use("/userJourneys", userJourneysRouter);
-
+app.use("/mail", nodemailer);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

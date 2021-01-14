@@ -22,7 +22,7 @@ async function createEvent(value) {
         eventName, eventType, uid, date, time, description, image, location, enableVolunteers, attendingList, likes, volunteerList, eventLink)
     VALUES
         ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-
+    RETURNING *
     `,
     [
       value.eventName,
@@ -40,7 +40,7 @@ async function createEvent(value) {
       value.eventLink,
     ]
   );
-  return res;
+  return res.rows[0];
 }
 
 async function imageUpload(image) {
