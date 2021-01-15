@@ -18,19 +18,21 @@ function sendEmail(userEmail, subject, text) {
   };
   // send mail with defined transport object
   //   const info = await transporter.sendMail(msg);
-  try {
-    transporter.sendMail(msg, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-  } catch (error) {
-    console.error(error);
-    // expected output: ReferenceError: nonExistentFunction is not defined
-    // Note - error messages will vary depending on browser
-  }
+
+  transporter.sendMail(msg, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 }
 
 module.exports = { sendEmail };
+// try {
+//     nonExistentFunction();
+//   } catch (error) {
+//     console.error(error);
+//     // expected output: ReferenceError: nonExistentFunction is not defined
+//     // Note - error messages will vary depending on browser
+//   }
