@@ -9,7 +9,7 @@ function sendEmail(userEmail, subject, text) {
     service: "hotmail",
     auth: {
       user: "societly.soc@outlook.com",
-      pass: "6miTY$aL#rX3y17At",
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
