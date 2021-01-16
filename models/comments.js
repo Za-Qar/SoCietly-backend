@@ -6,9 +6,9 @@ async function createComment(value) {
   const res = await query(
     `
     INSERT INTO comments(
-        commentUserId, name, surname, timeDate, commentEventId, profileImage, comment, likes)
+        commentUserId, name, surname, timeDate, commentEventId, profileImage, cohort, comment, likes)
     VALUES
-        ($1, $2, $3, $4, $5, $6, $7, $8)
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     RETURNING *
     `,
     [
@@ -18,6 +18,7 @@ async function createComment(value) {
       value.timeDate,
       value.commentEventId,
       value.profileImage,
+      value.cohort,
       value.comment,
       value.likes,
     ]
