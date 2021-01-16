@@ -28,8 +28,7 @@ async function createComment(value) {
 /*-----------GET: All comments------------*/
 async function getAllComments() {
   const res = await query(`
-  SELECT * FROM comments  LEFT JOIN events
-  ON comments.commentEventId = events.eventId ORDER BY timeDate ASC;
+  SELECT * FROM comments ORDER BY timeDate ASC;
   `);
   return res.rows;
 }
