@@ -39,17 +39,17 @@ async function patchComment(value, id) {
   console.log("this is comment: ", value);
   console.log("this is comment id: ", id);
   const res = await query(
-    `UPDATE events
+    `UPDATE comments
       SET commentUserId = COALESCE($1, commentUserId),
       name = COALESCE($2, name), 
       surname = COALESCE($3, surname),
       timeDate = COALESCE($4, timeDate),
       commentEventId = COALESCE($5, commentEventId),
       profileImage = COALESCE($6, profileImage),
-      cohort = COALESCE($7, cohort)
+      cohort = COALESCE($7, cohort),
       comment = COALESCE($8, comment),
-      likes = COALESCE($9, likes),
-      WHERE commentId = ${id}
+      likes = COALESCE($9, likes)
+      WHERE commentid = ${id}
       `,
     [
       value.commentUserId,
