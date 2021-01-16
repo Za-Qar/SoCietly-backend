@@ -6,7 +6,7 @@ async function dropTableEvents() {
   console.log(res);
 }
 
-dropTableEvents();
+// dropTableEvents();
 
 /*-------------Drop Table Create Journey Table-------------*/
 async function dropTableJourney() {
@@ -17,9 +17,17 @@ async function dropTableJourney() {
 // dropTableJourney();
 
 /*-------------Drop Table Users Table-------------*/
-async function dropTableUsers() {
-  let res = await query(`DROP TABLE users`);
+// async function dropTableUsers() {
+//   let res = await query(`DROP TABLE users`);
+//   console.log(res);
+// }
+
+// dropTableUsers();
+
+/*-------------Drop Table Comments Table-------------*/
+async function dropTableComments() {
+  let res = await query(`DROP TABLE comments`);
   console.log(res);
 }
 
-// dropTableUsers();
+dropTableComments();
