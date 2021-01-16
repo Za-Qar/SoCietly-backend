@@ -45,8 +45,9 @@ async function patchComment(value, id) {
       timeDate = COALESCE($4, timeDate),
       commentEventId = COALESCE($5, commentEventId),
       profileImage = COALESCE($6, profileImage),
-      comment = COALESCE($7, comment),
-      likes = COALESCE($8, likes),
+      cohort = COALESCE($7, cohort)
+      comment = COALESCE($8, comment),
+      likes = COALESCE($9, likes),
       WHERE commentId = ${id}
       `,
     [
@@ -56,6 +57,7 @@ async function patchComment(value, id) {
       value.timeDate,
       value.commentEventId,
       value.profileImage,
+      value.cohort,
       value.comment,
       value.likes,
     ]

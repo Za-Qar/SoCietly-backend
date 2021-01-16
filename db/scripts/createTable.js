@@ -76,7 +76,8 @@ async function createComments() {
             surname TEXT,
             timeDate TEXT,
             commentEventId INTEGER,
-            profileImage TEXT, 
+            profileImage TEXT,
+            cohort INTEGER,
             comment TEXT,
             likes TEXT[]
         )`

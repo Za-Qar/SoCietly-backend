@@ -17,10 +17,10 @@ async function dropTableJourney() {
 // dropTableJourney();
 
 /*-------------Drop Table Users Table-------------*/
-async function dropTableUsers() {
-  let res = await query(`DROP TABLE users`);
-  console.log(res);
-}
+// async function dropTableUsers() {
+//   let res = await query(`DROP TABLE users`);
+//   console.log(res);
+// }
 
 // dropTableUsers();
 
