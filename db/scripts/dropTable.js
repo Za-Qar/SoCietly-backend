@@ -6,7 +6,7 @@ async function dropTableEvents() {
   console.log(res);
 }
 
-dropTableEvents();
+// dropTableEvents();
 
 /*-------------Drop Table Create Journey Table-------------*/
 async function dropTableJourney() {
@@ -23,3 +23,11 @@ async function dropTableUsers() {
 }
 
 // dropTableUsers();
+
+/*-------------Drop Table Comments Table-------------*/
+async function dropTableComments() {
+  let res = await query(`DROP TABLE comments`);
+  console.log(res);
+}
+
+dropTableComments();

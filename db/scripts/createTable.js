@@ -64,4 +64,24 @@ async function createEvents() {
   console.log(res);
 }
 
-createEvents();
+// createEvents();
+
+/*-------------Create Comments Table-------------*/
+async function createComments() {
+  let res = await query(
+    `CREATE TABLE comments(
+            commentId SERIAL PRIMARY KEY,
+            commentUserId INTEGER,
+            name TEXT,
+            surname TEXT,
+            timeDate TEXT,
+            commentEventId INTEGER,
+            profileImage TEXT, 
+            comment TEXT,
+            likes TEXT[]
+        )`
+  );
+  console.log(res);
+}
+
+createComments();
