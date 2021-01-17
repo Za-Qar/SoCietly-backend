@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 function sendEmail(userEmail, subject, text) {
   console.log(userEmail, subject, text);
-  // create reusable transporter object using the default SMTP transport
+
   const transporter = nodemailer.createTransport({
     service: "hotmail",
     auth: {
@@ -28,6 +28,23 @@ function sendEmail(userEmail, subject, text) {
     }
   });
 }
+
+var CronJob = require("cron").CronJob;
+var job = new CronJob(
+  "0 0 * * 0-11 *",
+  function () {
+    sendEmail(
+      "za.qa@outlook.com",
+      "Every hour",
+      "this is just a test to see if I get the email every hour or not"
+    );
+    console.log("You will see this message every second");
+  },
+  null,
+  true,
+  "America/Los_Angeles"
+);
+job.start();
 
 module.exports = { sendEmail };
 // try {
