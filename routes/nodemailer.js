@@ -7,7 +7,9 @@ router.post("/", async (req, res) => {
   const email = req.body;
   console.log("this is email", email);
 
-  sendEmail(email?.to.join(", "), email?.subject, email?.text);
+  let emailContent = email.to.join(", ");
+
+  sendEmail(emailContent, email.subject, email.text);
 
   res.send("Email Sent!");
 });

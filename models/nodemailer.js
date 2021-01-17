@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 
 function sendEmail(userEmail, subject, text) {
+  console.log(userEmail, subject, text);
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     service: "hotmail",
