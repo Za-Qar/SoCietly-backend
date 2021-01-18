@@ -16,6 +16,8 @@ function sendEmail(userEmail, subject, text) {
     to: `${userEmail}`, // list of receivers
     subject: `${subject}`, // Subject line
     text: `${text}`, // plain text body
+    //check if we can link to a html file
+    // backticks html: `<img />`
   };
   // send mail with defined transport object
   //   const info = await transporter.sendMail(msg);
@@ -31,7 +33,7 @@ function sendEmail(userEmail, subject, text) {
 
 var CronJob = require("cron").CronJob;
 var job = new CronJob(
-  "0 0 * * 0-11 *",
+  "0 0 0 0 0-11 *",
   function () {
     sendEmail(
       "za.qa@outlook.com",
