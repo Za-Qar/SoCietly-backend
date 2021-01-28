@@ -24,7 +24,7 @@ http://localhost:3000/users
 
 # Get user by email
 
-e.g. shanicebasra@outlook.com
+e.g. za.qa@outlook.com
 
 http://localhost:3000/users?email=shanicebasra@outlook.com
 
