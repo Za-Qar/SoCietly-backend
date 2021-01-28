@@ -11,6 +11,14 @@ In the project directory, you can run:
 Runs the app in the development mode.
 Open [http://localhost:3000]
 
+## Nodemialer and Cron
+
+I implemented nodemailer so that when an event is created or deleted, users who opt-in to receiving emails will get one. Cron was implemented in order to send a monthly email to the users asking them to fill in a form as requested by our client who wanted to know how they were getting on. For now though, only I receive emails until the client finishes the form so that I can then make a get request to our users emails and send them one every month
+
+## Cloudinary
+
+I implemented Cloudinary so that users can upload images on the front end and when we receive the images as a string on the backend, we can then post it to my Cloudinary account and get back a unique id which then goes to our data base and can then be retrieved on the front end to be displayed on the page
+
 ## API GUIDE
 
 Clone server from https://github.com/SchoolOfCode/back-end-final-project-the-falcon-5ive.git
