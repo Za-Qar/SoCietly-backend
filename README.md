@@ -1,6 +1,6 @@
 # back-end-final-project-the-falcon-5ive
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project acts as the backend for [SoCietly-frontend](https://github.com/Za-Qar/SoCietly-frontend).
 
 ## Available Scripts
 
