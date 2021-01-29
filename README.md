@@ -11,7 +11,7 @@ In the project directory, you can run:
 Runs the app in the development mode.
 Open [http://localhost:3000]
 
-## Nodemialer and Cron
+## Nodemailer and Cron
 
 I implemented nodemailer so that when an event is created or deleted, users who opt-in to receiving emails will get one. Cron was implemented in order to send a monthly email to the users asking them to fill in a form as requested by our client who wanted to know how they were getting on. For now though, only I receive emails until the client finishes the form so that I can then make a get request to our users emails and send them one every month
 
